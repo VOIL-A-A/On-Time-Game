@@ -15,7 +15,7 @@
 body{
     animation: animatebody 25s linear infinite;
     background-repeat: repeat-x;
-    background-size:1400px;
+    background-size:100%;
 }
 @keyframes animatebody
 {

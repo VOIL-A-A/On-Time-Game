@@ -7,9 +7,9 @@ function pop() {
 moreinfo.addEventListener('click', pop);
 
 //Start Button
-let start = document.getElementById('start');
+let startButton = document.getElementById('start');
 
-start.addEventListener('click', Remove);
+startButton.addEventListener('click', Remove);
 
 let body = document.getElementById('body');
 
@@ -21,6 +21,21 @@ function Remove() {
     }
 }
 
+startButton.addEventListener('click', character)
+
+//Character
+function character(){
+kaboom({
+    width: 320,
+    height: 240,
+    font: 'sinko',
+	stretch: true,
+	letterbox: false,
+    canvas: document.querySelector('#mycanvas'),
+    background: [ 0, 0, 255, ],
+})
+
+}
 //Walking
 
 
