@@ -1,0 +1,30 @@
+.title{
+    text-align: center;
+    
+}
+.container{
+    display: grid;
+    grid-template-columns: 50% 50% ;
+}
+.tile{
+    max-width: 5em;
+}
+.start{
+    justify-content:center;
+}
+body{
+    animation: animatebody 25s linear infinite;
+    background-repeat: repeat-x;
+    background-size:1400px;
+}
+@keyframes animatebody
+{
+    0%
+    {
+        background-position-x: 0px
+    }
+    100%
+    {
+        background-position-x: -1500px
+    }
+}
