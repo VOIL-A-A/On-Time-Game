@@ -1,9 +1,22 @@
-//How to play Button
-let moreinfo = document.getElementById('moreInfo');
-function pop() {
-    alert('test');
-}
-moreinfo.addEventListener('click', pop);
+ // // variables for modal
+ const modal = document.getElementById("howToModal");
+ const spanClose = document.getElementsByClassName("closeModal")[0];
+ const howToButton = document.getElementById("moreInfo");
+ 
+ // // when the how to play button is clicked, the modal is opened
+ howToButton.onclick = function() {
+	 modal.style.display = "block";
+ }
+ // // when "Close" is clicked, the modal is closed
+ spanClose.onclick = function() {
+	 modal.style.display = "none";
+ }
+ // // when the modal is opened and anywhere outside of the modal is clicked, the modal will close
+ window.onclick = function(e) {
+	 if (e.target === modal) {
+		 modal.style.display = "none";
+	 }
+ }
 //Start Button
 let startButton = document.getElementById('start');
 startButton.addEventListener('click', Remove);
