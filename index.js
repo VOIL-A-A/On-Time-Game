@@ -1,37 +1,13 @@
-// // variables for modal
-const modal = document.getElementById("howToModal");
-const spanClose = document.getElementsByClassName("closeModal")[0];
-const howToButton = document.getElementById("moreInfo");
-
-// // when the how to play button is clicked, the modal is opened
-howToButton.onclick = function() {
-	modal.style.display = "block";
+//How to play Button
+let moreinfo = document.getElementById('moreInfo');
+function pop() {
+    alert('test');
 }
-// // when "Close" is clicked, the modal is closed
-spanClose.onclick = function() {
-	modal.style.display = "none";
-}
-// // when the modal is opened and anywhere outside of the modal is clicked, the modal will close
-window.onclick = function(e) {
-	if (e.target === modal) {
-		modal.style.display = "none";
-	}
-}
-// //How to play Button
-// let moreinfo = document.getElementById('moreInfo');
-
-// function pop() {
-//     alert('test');
-// }
-// moreinfo.addEventListener('click', pop);
-
+moreinfo.addEventListener('click', pop);
 //Start Button
 let startButton = document.getElementById('start');
-
 startButton.addEventListener('click', Remove);
-
 let bodyhtml = document.getElementById('body');
-
 //Remove Function
 function Remove() {
     let bodyChildren = bodyhtml.children;
@@ -39,10 +15,6 @@ function Remove() {
         bodyChildren[i].remove();
     }
 }
-
-
-
-
 //
 function startgame(){
 kaboom()
@@ -56,8 +28,6 @@ loadSprite("prize", 'laptop.png')
 loadSprite("apple", 'laptop.png')
 loadSprite("portal", 'laptop.png')
 loadSprite("coin", 'laptop.png')
-
-
 // custom component controlling enemy patrol movement
 function patrol(speed = 60, dir = 1) {
 	return {
@@ -76,42 +46,47 @@ function patrol(speed = 60, dir = 1) {
 	}
 }
 // define some constants
-const JUMP_FORCE = 1320
+const JUMP_FORCE = 1520
 const MOVE_SPEED = 480
 const FALL_DEATH = 2400
 
 const LEVELS = [
 	[
-		"                          $",
-		"                          $",
-		"                          $",
-		"                          $",
-		"                          $",
-		"           $$         =   $",
-		"  %      ====         =   $",
-		"                      =   $",
-		"                      =    ",
-		"       ^^      = >    =   @",
-		"===========================",
+	     "                                                        ",
+	    "          ===                                           ",
+	    "                                    ====          ==    ",
+	    "                       ====                             ",
+	    "===                                                     ",
+		"                                                       $",
+		"                                                       $",
+		"                                        =====          $",
+		"               ===                                     $",
+		"         $$                                            $",
+		"        ====          =                                $",
+		"                      =       ====             ====    $",
+		"                      =                                $",
+		"                      =                                $",
+		"       ^^      = >    =                                $",
+		"========================================================",
 	],
-	[
-		"     $    $    $    $     $",
-		"     $    $    $    $     $",
-		"                           ",
-		"                           ",
-		"                           ",
-		"                           ",
-		"                           ",
-		" ^^^^>^^^^>^^^^>^^^^>^^^^^@",
-		"===========================",
-	],
+// 	[
+// 		"     $    $    $    $     $",
+// 		"     $    $    $    $     $",
+// 		"                           ",
+// 		"                           ",
+// 		"                           ",
+// 		"                           ",
+// 		"                           ",
+// 		" ^^^^>^^^^>^^^^>^^^^>^^^^^@",
+// 		"===========================",
+// 	],
 ]
 
 // define what each symbol means in the level graph
 const levelConf = {
 	// grid size
-	width: 64,
-	height: 64,
+	width: 100,
+	height: 100,
 	// define each object as a list of components
 	"=": () => [
 		sprite("grass"),
@@ -162,15 +137,27 @@ const levelConf = {
 		pos(0, -12),
 		"portal",
 	],
+// 	">": () => [
+// 		sprite("ghosty"),
+// 		area(),
+// 		origin("bot"),
+// 		body(),
+// 		patrol(),
+// 		"enemy",
+// 	],
+// 	"@": () => [
+// 		sprite("portal"),
+// 		area({ scale: 0.5, }),
+// 		origin("bot"),
+// 		pos(0, -12),
+// 		"portal",
+// 	],
 }
 
 scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
-
 	gravity(3200)
-
 	// add level to scene
 	const level = addLevel(LEVELS[levelId ?? 0], levelConf)
-
 	// define player object
 	const player = add([
 		sprite("bean"),
@@ -182,7 +169,6 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 		// the custom component we defined above
 		origin("bot"),
 	])
-
 	// action() runs every frame
 	player.onUpdate(() => {
 		// center camera to player
@@ -192,7 +178,6 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 			go("lose")
 		}
 	})
-
 	// if player onCollide with any obj with "danger" tag, lose
 	player.onCollide("danger", () => {
 		go("lose")
@@ -223,29 +208,50 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 			go("lose")
 		}
 	})
+// 	player.onCollide("portal", () => {
+// 		if (levelId + 1 < LEVELS.length) {
+// 			go("game", {
+// 				levelId: levelId + 1,
+// 				coins: coins,
+// 			})
+// 		} else {
+// 			go("win")
+// 		}
+// 	})
+
+// 	player.onGround((l) => {
+// 		if (l.is("enemy")) {
+// 			player.jump(JUMP_FORCE * 1.5)
+// 			destroy(l)
+// 			addKaboom(player.pos)
+// 		}
+// 	})
+
+// 	player.onCollide("enemy", (e, col) => {
+// 		// if it's not from the top, die
+// 		if (!col.isBottom()) {
+// 			go("lose")
+// 		}
+// 	})
 
 
 	let coinPitch = 0
-
 	onUpdate(() => {
 		if (coinPitch > 0) {
 			coinPitch = Math.max(0, coinPitch - dt() * 100)
 		}
 	})
-
 	player.onCollide("coin", (c) => {
 		destroy(c)
 		coinPitch += 100
 		coins += 1
 		coinsLabel.text = coins
 	})
-
 	const coinsLabel = add([
 		text(coins),
 		pos(24, 24),
 		fixed(),
 	])
-
 	// jump with space
 	onKeyPress("space", () => {
 		// these 2 functions are provided by body() component
@@ -253,40 +259,31 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 			player.jump(JUMP_FORCE)
 		}
 	})
-
 	onKeyDown("left", () => {
 		player.move(-MOVE_SPEED, 0)
 	})
-
 	onKeyDown("right", () => {
 		player.move(MOVE_SPEED, 0)
 	})
-
 	onKeyPress("down", () => {
 		player.weight = 3
 	})
-
 	onKeyRelease("down", () => {
 		player.weight = 1
 	})
-
 })
-
 scene("lose", () => {
 	add([
 		text("You Lose"),
 	])
 	onKeyPress(() => go("game"))
 })
-
 scene("win", () => {
 	add([
 		text("You Win"),
 	])
 	onKeyPress(() => go("game"))
 })
-
 go("game")
 }
 startButton.addEventListener('click',startgame)
-
