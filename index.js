@@ -57,42 +57,47 @@ function patrol(speed = 60, dir = 1) {
 	}
 }
 // define some constants
-const JUMP_FORCE = 1320
+const JUMP_FORCE = 1520
 const MOVE_SPEED = 480
 const FALL_DEATH = 2400
 
 const LEVELS = [
 	[
-		"                          $",
-		"                          $",
-		"                          $",
-		"                          $",
-		"                          $",
-		"           $$         =   $",
-		"  %      ====         =   $",
-		"                      =   $",
-		"                      =    ",
-		"       ^^      = >    =   @",
-		"===========================",
+	    "                                                        ",
+	    "          ===                                           ",
+	    "                                    ====          ==    ",
+	    "                       ====                             ",
+	    "===                                                     ",
+		"                                                       $",
+		"                                                       $",
+		"                                        =====          $",
+		"               ===                                     $",
+		"         $$                                            $",
+		"        ====          =                                $",
+		"                      =       ====             ====    $",
+		"                      =                                $",
+		"                      =                                $",
+		"       ^^      = >    =                                $",
+		"========================================================",
 	],
-	[
-		"     $    $    $    $     $",
-		"     $    $    $    $     $",
-		"                           ",
-		"                           ",
-		"                           ",
-		"                           ",
-		"                           ",
-		" ^^^^>^^^^>^^^^>^^^^>^^^^^@",
-		"===========================",
-	],
+// 	[
+// 		"     $    $    $    $     $",
+// 		"     $    $    $    $     $",
+// 		"                           ",
+// 		"                           ",
+// 		"                           ",
+// 		"                           ",
+// 		"                           ",
+// 		" ^^^^>^^^^>^^^^>^^^^>^^^^^@",
+// 		"===========================",
+// 	],
 ]
 
 // define what each symbol means in the level graph
 const levelConf = {
 	// grid size
-	width: 64,
-	height: 64,
+	width: 100,
+	height: 100,
 	// define each object as a list of components
 	"=": () => [
 		sprite("grass"),
@@ -128,21 +133,21 @@ const levelConf = {
 		body(),
 		"apple",
 	],
-	">": () => [
-		sprite("ghosty"),
-		area(),
-		origin("bot"),
-		body(),
-		patrol(),
-		"enemy",
-	],
-	"@": () => [
-		sprite("portal"),
-		area({ scale: 0.5, }),
-		origin("bot"),
-		pos(0, -12),
-		"portal",
-	],
+// 	">": () => [
+// 		sprite("ghosty"),
+// 		area(),
+// 		origin("bot"),
+// 		body(),
+// 		patrol(),
+// 		"enemy",
+// 	],
+// 	"@": () => [
+// 		sprite("portal"),
+// 		area({ scale: 0.5, }),
+// 		origin("bot"),
+// 		pos(0, -12),
+// 		"portal",
+// 	],
 }
 
 scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
@@ -179,31 +184,31 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 		go("lose")
 	})
 
-	player.onCollide("portal", () => {
-		if (levelId + 1 < LEVELS.length) {
-			go("game", {
-				levelId: levelId + 1,
-				coins: coins,
-			})
-		} else {
-			go("win")
-		}
-	})
+// 	player.onCollide("portal", () => {
+// 		if (levelId + 1 < LEVELS.length) {
+// 			go("game", {
+// 				levelId: levelId + 1,
+// 				coins: coins,
+// 			})
+// 		} else {
+// 			go("win")
+// 		}
+// 	})
 
-	player.onGround((l) => {
-		if (l.is("enemy")) {
-			player.jump(JUMP_FORCE * 1.5)
-			destroy(l)
-			addKaboom(player.pos)
-		}
-	})
+// 	player.onGround((l) => {
+// 		if (l.is("enemy")) {
+// 			player.jump(JUMP_FORCE * 1.5)
+// 			destroy(l)
+// 			addKaboom(player.pos)
+// 		}
+// 	})
 
-	player.onCollide("enemy", (e, col) => {
-		// if it's not from the top, die
-		if (!col.isBottom()) {
-			go("lose")
-		}
-	})
+// 	player.onCollide("enemy", (e, col) => {
+// 		// if it's not from the top, die
+// 		if (!col.isBottom()) {
+// 			go("lose")
+// 		}
+// 	})
 
 
 	let coinPitch = 0
