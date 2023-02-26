@@ -29,22 +29,21 @@ function Remove() {
     }
 }
 
-let cons = 0;
 //
 function startgame(){
 kaboom()
 fullscreen(!fullscreen())
 //Cons(coins) is not workin as intended
-cons = 0;
+let cons = 0;
 // Load assets
-loadSprite("bean", 'laptop.png')
-loadSprite("ghosty", 'laptop.png')
-loadSprite("spike", 'laptop.png')
-loadSprite("grass", 'laptop.png')
-loadSprite("prize", 'laptop.png')
-loadSprite("apple", 'laptop.png')
-loadSprite("portal", 'laptop.png')
-loadSprite("coin", 'laptop.png')
+loadSprite("bean", 'importantImages/laptop.png')
+loadSprite("ghosty", 'importantImages/laptop.png')
+loadSprite("spike", 'importantImages/laptop.png')
+loadSprite("grass", 'importantImages/laptop.png')
+loadSprite("prize", 'importantImages/laptop.png')
+loadSprite("apple", 'importantImages/laptop.png')
+loadSprite("portal", 'importantImages/laptop.png')
+loadSprite("coin", 'importantImages/AAL.PNG')
 // custom component controlling enemy patrol movement
 function patrol(speed = 60, dir = 1) {
 	return {
@@ -315,6 +314,7 @@ scene("win", () => {
 		text(`You Won With a score of ${cons}`),
 	])
 	onKeyPress(() => go("game"))
+	cons = 0
 })
 go("game")
 }
