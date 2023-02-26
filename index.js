@@ -106,7 +106,7 @@ const LEVELS = [
 // define what each symbol means in the level graph
 const levelConf = {
 	// grid size
-	width: 100,
+	width: 105,
 	height: 100,
 	// define each object as a list of components
 	"=": () => [
