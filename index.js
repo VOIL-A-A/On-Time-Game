@@ -28,10 +28,14 @@ function Remove() {
         bodyChildren[i].remove();
     }
 }
+
+let cons = 0;
 //
 function startgame(){
 kaboom()
-	fullscreen(!fullscreen())
+fullscreen(!fullscreen())
+//Cons(coins) is not workin as intended
+cons = 0;
 // Load assets
 loadSprite("bean", 'laptop.png')
 loadSprite("ghosty", 'laptop.png')
@@ -247,6 +251,20 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 // 		}
 // 	})
 
+const timer = add([
+		text(10),
+		pos(100, 32),
+		fixed(),
+		{ time: 10, },
+	])
+
+	timer.onUpdate(() => {
+		timer.time -= dt()
+		timer.text = timer.time.toFixed(2)
+		if (timer.time < 0) {
+			go("win")
+		}
+	})
 
 	let coinPitch = 0
 	onUpdate(() => {
@@ -256,6 +274,7 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 	})
 	player.onCollide("coin", (c) => {
 		destroy(c)
+		cons += 1
 		coinPitch += 100
 		coins += 1
 		coinsLabel.text = coins
@@ -293,7 +312,7 @@ scene("lose", () => {
 })
 scene("win", () => {
 	add([
-		text("You Win"),
+		text(`You Won With a score of ${cons}`),
 	])
 	onKeyPress(() => go("game"))
 })
