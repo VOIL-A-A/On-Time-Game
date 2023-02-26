@@ -37,9 +37,9 @@ fullscreen(!fullscreen())
 let cons = 0;
 // Load assets
 loadSprite("bean", 'importantImages/laptop.png')
-loadSprite("ghosty", 'importantImages/laptop.png')
+loadSprite("ghosty", 'importantImages/alarm.PNG')
 loadSprite("spike", 'importantImages/laptop.png')
-loadSprite("grass", 'importantImages/laptop.png')
+loadSprite("grass", 'importantImages/rock.PNG')
 loadSprite("prize", 'importantImages/laptop.png')
 loadSprite("apple", 'importantImages/laptop.png')
 loadSprite("portal", 'importantImages/laptop.png')
