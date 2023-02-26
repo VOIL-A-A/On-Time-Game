@@ -43,6 +43,11 @@ loadSprite("grass", 'importantImages/laptop.png')
 loadSprite("prize", 'importantImages/laptop.png')
 loadSprite("apple", 'importantImages/laptop.png')
 loadSprite("portal", 'importantImages/laptop.png')
+loadSprite("book2", 'importantImages/atomic.PNG')
+loadSprite("keys", 'importantImages/keys.PNG')
+loadSprite("laptop", 'importantImages/laptop.PNG')
+loadSprite("bookbag", 'importantImages/backpack.PNG')
+loadSprite("charger", 'importantImages/charger.PNG')
 loadSprite("coin", 'importantImages/AAL.PNG')
 // custom component controlling enemy patrol movement
 function patrol(speed = 60, dir = 1) {
@@ -68,21 +73,21 @@ const FALL_DEATH = 2400
 
 const LEVELS = [
 	[
-	     "                                                        ",
-	    "          ===                                           ",
-	    "                                    ====          ==    ",
-	    "                       ====                             ",
-	    "===                                                     ",
+	    "      88                                               $",
+	    "      ===                                              $",
+	    "                                    ====          ==   $",
+	    "                       ====                            $",
+	    "===                                                    $",
 		"                                                       $",
 		"                                                       $",
-		"                                        =====          $",
+		"                22                       =====         $",
 		"               ===                                     $",
 		"         $$                                            $",
-		"        ====          =                                $",
-		"                      =       ====             ====    $",
+		"        ====          =       1 1             5 5      $",
+		"                      =      ====            ====      $",
 		"                      =                                $",
-		"                      =                                $",
-		"       ^^      = >    =                                $",
+		"                      =              ==                $",
+		"       ^^      = >    =    00      >                   $",
 		"========================================================",
 	],
 // 	[
@@ -113,7 +118,25 @@ const levelConf = {
 	"$": () => [
 		sprite("coin"),
 		area(),
-		pos(0, -9),
+		// pos(0, -9),
+		origin("bot"),
+		"coin",
+	],
+	"0": () => [
+		sprite("laptop"),
+		area(),
+		origin("bot"),
+		"coin",
+	],
+	"5": () => [
+		sprite("charger"),
+		area(),
+		origin("bot"),
+		"coin",
+	],
+	"1": () => [
+		sprite("book2"),
+		area(),
 		origin("bot"),
 		"coin",
 	],
@@ -123,6 +146,20 @@ const levelConf = {
 		solid(),
 		origin("bot"),
 		"prize",
+	],
+	"8": () => [
+		sprite("bookbag"),
+		area(),
+		solid(),
+		origin("bot"),
+		"coin",
+	],
+	"2": () => [
+		sprite("keys"),
+		area(),
+		solid(),
+		origin("bot"),
+		"coin",
 	],
 	"^": () => [
 		sprite("spike"),
@@ -272,6 +309,13 @@ const timer = add([
 		}
 	})
 	player.onCollide("coin", (c) => {
+		destroy(c)
+		cons += 1
+		coinPitch += 100
+		coins += 1
+		coinsLabel.text = coins
+	})
+	player.onCollide("bookbag", (c) => {
 		destroy(c)
 		cons += 1
 		coinPitch += 100
