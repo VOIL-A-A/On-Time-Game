@@ -107,6 +107,7 @@ const LEVELS = [
 const levelConf = {
 	// grid size
 	width: 100,
+	
 	height: 100,
 	// define each object as a list of components
 	"=": () => [
