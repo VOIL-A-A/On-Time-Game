@@ -73,7 +73,7 @@ const FALL_DEATH = 2400
 
 const LEVELS = [
 	[
-	    "      88                                               $",
+	    "       8                                               $",
 	    "      ===                                              $",
 	    "                                    ====          ==   $",
 	    "                       ====                            $",
@@ -81,13 +81,13 @@ const LEVELS = [
 		"                                                       $",
 		"                                                       $",
 		"                22                       =====         $",
-		"               ===                                     $",
-		"         $$                                            $",
-		"        ====          =       1 1             5 5      $",
-		"                      =      ====            ====      $",
+		"      $$       ===                                     $",
+		"     ====                                              $",
+		"                      =       1 1              5       $",
+		"                      =      ====      >     ====      $",
+		"==                    =               ====             $",
 		"                      =                                $",
-		"                      =              ==                $",
-		"       ^^      = >    =    00      >                   $",
+		"       ^^      = >    =     0      >                   =",
 		"========================================================",
 	],
 // 	[
@@ -118,24 +118,27 @@ const levelConf = {
 	"$": () => [
 		sprite("coin"),
 		area(),
-		// pos(0, -9),
+		pos(0, -40),
 		origin("bot"),
 		"coin",
 	],
 	"0": () => [
 		sprite("laptop"),
 		area(),
+		pos(0,-40),
 		origin("bot"),
 		"coin",
 	],
 	"5": () => [
 		sprite("charger"),
 		area(),
+		pos(0,-40),
 		origin("bot"),
 		"coin",
 	],
 	"1": () => [
 		sprite("book2"),
+		pos(0,-40),
 		area(),
 		origin("bot"),
 		"coin",
@@ -150,6 +153,7 @@ const levelConf = {
 	"8": () => [
 		sprite("bookbag"),
 		area(),
+		pos(0,-40),
 		solid(),
 		origin("bot"),
 		"coin",
@@ -157,6 +161,7 @@ const levelConf = {
 	"2": () => [
 		sprite("keys"),
 		area(),
+		pos(0,-20),
 		solid(),
 		origin("bot"),
 		"coin",
@@ -288,10 +293,10 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 // 	})
 
 const timer = add([
-		text(10),
+		text(30),
 		pos(100, 32),
 		fixed(),
-		{ time: 10, },
+		{ time: 30, },
 	])
 
 	timer.onUpdate(() => {
