@@ -32,16 +32,21 @@ function Remove() {
 //
 function startgame(){
 kaboom()
+loadSprite("bg", 'importantImages/alarm.PNG')
+add([
+	sprite('bg',{width: width(), height: height()})
+	]);
 fullscreen(!fullscreen())
 //Cons(coins) is not workin as intended
 let cons = 0;
 // Load assets
+
 loadSprite("bean", 'importantImages/laptop.png')
 loadSprite("ghosty", 'importantImages/laptop.png')
 loadSprite("spike", 'importantImages/laptop.png')
-loadSprite("grass", 'importantImages/laptop.png')
-loadSprite("prize", 'importantImages/laptop.png')
-loadSprite("apple", 'importantImages/laptop.png')
+loadSprite("grass", 'importantImages/rock.PNG')
+// loadSprite("prize", 'importantImages/laptop.png')
+// loadSprite("apple", 'importantImages/laptop.png')
 loadSprite("portal", 'importantImages/laptop.png')
 loadSprite("book2", 'importantImages/atomic.PNG')
 loadSprite("keys", 'importantImages/keys.PNG')
@@ -73,19 +78,19 @@ const FALL_DEATH = 2400
 
 const LEVELS = [
 	[
-	    "       8                                               $",
+	    "       8                                               1",
 	    "      ===                                              $",
-	    "                                    ====          ==   $",
-	    "                       ====                            $",
-	    "===                                                    $",
-		"                                                       $",
-		"                                                       $",
-		"                22                       =====         $",
-		"      $$       ===                                     $",
+	    "                                   ====     =     ==   1",
+	    "                             =                         $",
+	    "===                        ^=           ==             1",
+		"                          ^=                           $",
+		"                          =                            1",
+		"               22        =                =====        $",
+		"      $$      ===                                 ==   1",
 		"     ====                                              $",
-		"                      =       1 1              5       $",
-		"                      =      ====      >     ====      $",
-		"==                    =               ====             $",
+		"                      =        1 1              5      1",
+		"                      =       ====      >     ====     $",
+		"==                    =               ====             1",
 		"                      =                                $",
 		"       ^^      = >    =     0      >                   =",
 		"========================================================",
@@ -144,13 +149,13 @@ const levelConf = {
 		origin("bot"),
 		"coin",
 	],
-	"%": () => [
-		sprite("prize"),
-		area(),
-		solid(),
-		origin("bot"),
-		"prize",
-	],
+	// "%": () => [
+	// 	sprite("prize"),
+	// 	area(),
+	// 	solid(),
+	// 	origin("bot"),
+	// 	"prize",
+	// ],
 	"8": () => [
 		sprite("bookbag"),
 		area(),
@@ -174,13 +179,13 @@ const levelConf = {
 		origin("bot"),
 		"danger",
 	],
-	"#": () => [
-		sprite("apple"),
-		area(),
-		origin("bot"),
-		body(),
-		"apple",
-	],
+	// "#": () => [
+	// 	sprite("apple"),
+	// 	area(),
+	// 	origin("bot"),
+	// 	body(),
+	// 	"apple",
+	// ],
 	">": () => [
 		sprite("ghosty"),
 		area(),
@@ -295,7 +300,7 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 
 const timer = add([
 		text(30),
-		pos(100, 32),
+		pos(100, 22),
 		fixed(),
 		{ time: 30, },
 	])
@@ -355,13 +360,14 @@ const timer = add([
 })
 scene("lose", () => {
 	add([
-		text("You Lose"),
+		text(`You Died! Score: ${cons}`),
 	])
 	onKeyPress(() => go("game"))
+	cons = 0
 })
 scene("win", () => {
 	add([
-		text(`You Won With a score of ${cons}`),
+		text(`Times up! Score: ${cons}`),
 	])
 	onKeyPress(() => go("game"))
 	cons = 0
