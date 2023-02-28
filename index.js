@@ -118,7 +118,7 @@ const LEVELS = [
 		"                           							",
 		"                           							",
 		"                           							",
-		"	$$$$												",
+		"	$$$$@												",
 		"=======================================================",
 	],
 ]
@@ -346,7 +346,7 @@ const timer = add([
 		timer.time -= dt()
 		timer.text = timer.time.toFixed(2)
 		if (timer.time < 0) {
-			go("win")
+			go("time")
 		}
 	})
 
@@ -404,10 +404,15 @@ scene("lose", () => {
 })
 scene("win", () => {
 	add([
-		text(`Times up! Score: ${cons}`),
-g	])
+		text(`You Arrived at Marcy! Score: ${cons}`),
+	])
 	onKeyPress(() => go("game"))
 	cons = 0
+})
+scene('time', () => {
+	add([
+		text('You ran out of time!')
+		])
 })
 go("game")
 }
