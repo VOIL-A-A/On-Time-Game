@@ -418,6 +418,8 @@ scene('time', () => {
 	add([
 		text('You ran out of time!')
 		])
+	onKeyPress(() => go("game"))
+	cons = 0
 })
 go("game")
 }
