@@ -36,7 +36,7 @@ fullscreen(!fullscreen())
 //Cons(coins) is not workin as intended
 let cons = 0;
 // Load assets
-loadSprite("bg", 'building.jpg')
+loadSprite("bg", 'importantImages/background.png')
 loadSprite("bean", 'importantImages/laptop.png')
 loadSprite("ghosty", 'importantImages/alarm.PNG')
 loadSprite("spike", 'importantImages/tiktok.png')
