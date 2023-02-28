@@ -51,24 +51,24 @@ loadSprite("bookbag", 'importantImages/backpack.PNG')
 loadSprite("charger", 'importantImages/charger.PNG')
 loadSprite("coin", 'importantImages/AAL.PNG')
 //loading sprite with spritesheet
-loadSprite("student", 'importantImages/student_sprite.png', {
-	sliceX: 3,
-	sliceY: 6,
-	anims: {
-		"idle": {
-			from: 0,
-			to: 3,
-			speed: 5,
-			loop: true,
-		},
-		"run": {
-			from: 4,
-			to: 8,
-			speed: 10,
-			loop: true,
-		}
-	}
-})
+// loadSprite("student", 'importantImages/student_sprite.png', {
+// 	sliceX: 3,
+// 	sliceY: 6,
+// 	anims: {
+// 		"idle": {
+// 			from: 0,
+// 			to: 3,
+// 			speed: 5,
+// 			loop: true,
+// 		},
+// 		"run": {
+// 			from: 4,
+// 			to: 8,
+// 			speed: 10,
+// 			loop: true,
+// 		}
+// 	}
+// })
 // custom component controlling enemy patrol movement
 function patrol(speed = 60, dir = 1) {
 	return {
@@ -233,35 +233,35 @@ const levelConf = {
 // 	],
 } 
 
-add([
-	sprite('bg'),
-	pos(1,0),
-	pos(width()/2, height()/2),
-	origin('center'),
-	scale(0.4999, 0.4),
-	layer('bg')
+// add([
+// 	sprite('bg'),
+// 	pos(1,0),
+// 	pos(width()/2, height()/2),
+// 	origin('center'),
+// 	scale(0.4999, 0.4),
+// 	layer('bg')
 
-]);
+// ]);
 
 scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
-	const backround = add([
-		sprite('bg', {width: width(), height: height()}),
-		pos(1,0),
-		pos(width()/2, height()/2),
-		origin('center'),
-		scale(1),
-		fixed()
-		// scale(0.4999, 0.4),
-		// layer('bg')
+	// add([
+	// 	sprite('bg', {width: width(), height: height()}),
+	// 	pos(1,0),
+	// 	pos(width()/2, height()/2),
+	// 	origin('center'),
+	// 	scale(1),
+	// 	fixed()
+	// 	// scale(0.4999, 0.4),
+	// 	// layer('bg')
 	
-	]);
+	// ]);
 	
 	gravity(3200)
 	// add level to scene
 	const level = addLevel(LEVELS[levelId ?? 0], levelConf)
 	// define player object
 	const player = add([
-		sprite("student"),
+		sprite("bean"),
 		pos(0, 0),
 		area(),
 		scale(1),
