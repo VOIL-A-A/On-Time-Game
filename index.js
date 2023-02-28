@@ -293,7 +293,7 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 		if (levelId + 1 < LEVELS.length) {
 			go("game", {
 				levelId: levelId + 1,
-				coins: coins,
+				coins: cons,
 			})
 		} else {
 			go("win")
@@ -314,16 +314,7 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 			go("lose")
 		}
 	})
-	player.onCollide("portal", () => {
-		if (levelId + 1 < LEVELS.length) {
-			go("game", {
-				levelId: levelId + 1,
-				coins: coins,
-			})
-		} else {
-			go("win")
-		}
-	})
+	
 
 // 	player.onGround((l) => {
 // 		if (l.is("enemy")) {
@@ -341,10 +332,10 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 // 	})
 
 const timer = add([
-		text(10),
+		text(20),
 		pos(150, 22),
 		fixed(),
-		{ time: 10, },
+		{ time: 20, },
 	])
 
 	timer.onUpdate(() => {
