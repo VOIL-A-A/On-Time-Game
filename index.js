@@ -43,7 +43,7 @@ let cons = 0;
 
 loadSprite("bean", 'importantImages/laptop.png')
 loadSprite("ghosty", 'importantImages/alarm.PNG')
-loadSprite("spike", 'importantImages/laptop.png')
+loadSprite("spike", 'importantImages/tiktok.png')
 loadSprite("grass", 'importantImages/rock.PNG')
 // loadSprite("prize", 'importantImages/laptop.png')
 // loadSprite("apple", 'importantImages/laptop.png')
@@ -234,9 +234,31 @@ const levelConf = {
 // 		pos(0, -12),
 // 		"portal",
 // 	],
-}
+} 
+
+add([
+	sprite('bg'),
+	pos(1,0),
+	pos(width()/2, height()/2),
+	origin('center'),
+	scale(0.4999, 0.4),
+	layer('bg')
+
+]);
 
 scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
+	const backround = add([
+		sprite('bg', {width: width(), height: height()}),
+		pos(1,0),
+		pos(width()/2, height()/2),
+		origin('center'),
+		scale(1),
+		fixed()
+		// scale(0.4999, 0.4),
+		// layer('bg')
+	
+	]);
+	
 	gravity(3200)
 	// add level to scene
 	const level = addLevel(LEVELS[levelId ?? 0], levelConf)
