@@ -36,7 +36,7 @@ fullscreen(!fullscreen())
 //Cons(coins) is not workin as intended
 let cons = 0;
 // Load assets
-
+loadSprite("bg", 'building.jpg')
 loadSprite("bean", 'importantImages/laptop.png')
 loadSprite("ghosty", 'importantImages/alarm.PNG')
 loadSprite("spike", 'importantImages/tiktok.png')
@@ -244,17 +244,17 @@ const levelConf = {
 // ]);
 
 scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
-	// add([
-	// 	sprite('bg', {width: width(), height: height()}),
-	// 	pos(1,0),
-	// 	pos(width()/2, height()/2),
-	// 	origin('center'),
-	// 	scale(1),
-	// 	fixed()
-	// 	// scale(0.4999, 0.4),
-	// 	// layer('bg')
+	add([
+		sprite('bg', {width: width(), height: height()}),
+		pos(1,0),
+		pos(width()/2, height()/2),
+		origin('center'),
+		scale(1),
+		fixed()
+		// scale(0.4999, 0.4),
+		// layer('bg')
 	
-	// ]);
+	]);
 	
 	gravity(3200)
 	// add level to scene
