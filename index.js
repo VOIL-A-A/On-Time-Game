@@ -105,22 +105,22 @@ const LEVELS = [
 		"========================================================",
 	],
 	[
-		"   													",
-		"   													",
-		"								                        ",
-		"                           							",
-		"                           							",
-		"                           							",
-		"                           							",
-		"	$$$$@												",
-		"=======================================================",
+		"                             ",
+		"                             ",
+		"                             ",
+		"       ==================    ",
+		"      =                      ",
+		"     =                       ",
+		"    =                        ",
+		"   =                        =",
+		"============================="
 	],
 ]
 
 // define what each symbol means in the level graph
 const levelConf = {
 	// grid size
-	width: 100,
+	width: 95,
 	
 	height: 100,
 	// define each object as a list of components
@@ -237,7 +237,7 @@ const levelConf = {
 
 // ]);
 
-scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
+scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) => {
 	add([
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
@@ -292,6 +292,8 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 	player.onCollide("portal", () => {
 		if (levelId + 1 < LEVELS.length) {
 			go("game", {
+				timer: timer.text = 120,
+				timer: timer.time = 120,
 				levelId: levelId + 1,
 				coins: cons,
 			})
@@ -331,11 +333,11 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 // 		}
 // 	})
 
-const timer = add([
-		text(20),
+	 timer = add([
+		text(30),
 		pos(150, 22),
 		fixed(),
-		{ time: 20, },
+		{ time: 30, },
 	])
 
 	timer.onUpdate(() => {
@@ -393,22 +395,58 @@ const timer = add([
 })
 scene("lose", () => {
 	add([
+		sprite('bg', {width: width(), height: height()}),
+		pos(1,0),
+		pos(width()/2, height()/2),
+		origin('center'),
+		scale(1),
+		fixed(),
+		// scale(0.4999, 0.4),
+		// layer('bg')
 		text(`You Died! Score: ${cons}`),
 	])
+	add([
+		text('Press any Key to Restart'),
+		pos(250,500)
+		])
 	onKeyPress(() => go("game"))
 	cons = 0
 })
 scene("win", () => {
 	add([
+		sprite('bg', {width: width(), height: height()}),
+		pos(1,0),
+		pos(width()/2, height()/2),
+		origin('center'),
+		scale(1),
+		fixed(),
+		// scale(0.4999, 0.4),
+		// layer('bg')
 		text(`You Arrived at Marcy! Score: ${cons}`),
+	])
+	add([
+		text('Press any Key to Restart'),
+		pos(250,500)
 	])
 	onKeyPress(() => go("game"))
 	cons = 0
 })
 scene('time', () => {
 	add([
+		sprite('bg', {width: width(), height: height()}),
+		pos(1,0),
+		pos(width()/2, height()/2),
+		origin('center'),
+		scale(1),
+		fixed(),
+		// scale(0.4999, 0.4),
+		// layer('bg')
 		text('You ran out of time!')
 		])
+	add([
+		text('Press any Key to Restart'),
+		pos(250,500)
+	])
 	onKeyPress(() => go("game"))
 	cons = 0
 })
