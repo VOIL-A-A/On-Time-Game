@@ -50,25 +50,19 @@ loadSprite("laptop", 'importantImages/laptop.PNG')
 loadSprite("bookbag", 'importantImages/backpack.PNG')
 loadSprite("charger", 'importantImages/charger.PNG')
 loadSprite("coin", 'importantImages/AAL.PNG')
-//loading sprite with spritesheet
-// loadSprite("student", 'importantImages/student_sprite.png', {
-// 	sliceX: 3,
-// 	sliceY: 6,
-// 	anims: {
-// 		"idle": {
-// 			from: 0,
-// 			to: 3,
-// 			speed: 5,
-// 			loop: true,
-// 		},
-// 		"run": {
-// 			from: 4,
-// 			to: 8,
-// 			speed: 10,
-// 			loop: true,
-// 		}
-// 	}
-// })
+//loading sprite with spritesheet for idle animation
+loadSprite("student-idle", 'importantImages/student_sprite.png', {
+	sliceY: 7,
+	sliceX: 7,
+	anims: {
+		"idle": {
+			from: 0,
+			to: 1,
+			speed: 5,
+			loop: true
+		},
+	},
+});
 // custom component controlling enemy patrol movement
 function patrol(speed = 60, dir = 1) {
 	return {
@@ -261,7 +255,7 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 	const level = addLevel(LEVELS[levelId ?? 0], levelConf)
 	// define player object
 	const player = add([
-		sprite("bean"),
+		sprite("student-idle"),
 		pos(0, 0),
 		area(),
 		scale(1),
@@ -270,6 +264,17 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 		// the custom component we defined above
 		origin("bot"),
 	])
+// makes it so that the idle animation plays
+	player.play("idle");
+// so idle animation plays when player is on ground
+	player.onGround(() => {
+		if (!isKeyDown("left") && !isKeyDown("right")) {
+			player.play("idle")
+		}
+		//  else {
+		// 	player.play("run")
+		// }
+	})
 	// action() runs every frame
 	player.onUpdate(() => {
 		// center camera to player
