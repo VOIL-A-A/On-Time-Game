@@ -386,7 +386,7 @@ scene("lose", () => {
 scene("win", () => {
 	add([
 		text(`Times up! Score: ${cons}`),
-	])
+g	])
 	onKeyPress(() => go("game"))
 	cons = 0
 })
