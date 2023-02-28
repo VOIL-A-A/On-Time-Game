@@ -336,10 +336,10 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 // 	})
 
 const timer = add([
-		text(30),
+		text(10),
 		pos(150, 22),
 		fixed(),
-		{ time: 30, },
+		{ time: 10, },
 	])
 
 	timer.onUpdate(() => {
@@ -413,6 +413,8 @@ scene('time', () => {
 	add([
 		text('You ran out of time!')
 		])
+	onKeyPress(() => go("game"))
+	cons = 0
 })
 go("game")
 }
