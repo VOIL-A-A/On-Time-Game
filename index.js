@@ -32,10 +32,6 @@ function Remove() {
 //
 function startgame(){
 kaboom()
-loadSprite("bg", 'importantImages/alarm.PNG')
-add([
-	sprite('bg',{width: width(), height: height()})
-	]);
 fullscreen(!fullscreen())
 //Cons(coins) is not workin as intended
 let cons = 0;
@@ -98,39 +94,40 @@ const FALL_DEATH = 2400
 const LEVELS = [
 	[
 	    "       8                                               1",
-	    "      ===                                              $",
+	    "      ===                          $1$1     1     $1   $",
 	    "                                   ====     =     ==   1",
-	    "                             =                         $",
+	    "                             =          $1             $",
 	    "===                        ^=           ==             1",
 		"                          ^=                           $",
-		"                          =                            1",
-		"               22        =                =====        $",
-		"      $$      ===                                 ==   1",
+		"                          =             1$1$1          1",
+		"              2          =              =====    $1    $",
+		"      $      ===                                 ==    1",
 		"     ====                                              $",
-		"                      =        1 1              5      1",
-		"                      =       ====      >     ====     $",
+		"                      =        1               5       1",
+		"0                     =       ====     >      ====     $",
 		"==                    =               ====             1",
 		"                      =                                $",
-		"       ^^      = >    =     0      >                   =",
+		"       ^^      = >    =            >                 = @",
 		"========================================================",
 	],
-// 	[
-// 		"     $    $    $    $     $",
-// 		"     $    $    $    $     $",
-// 		"                           ",
-// 		"                           ",
-// 		"                           ",
-// 		"                           ",
-// 		"                           ",
-// 		" ^^^^>^^^^>^^^^>^^^^>^^^^^@",
-// 		"===========================",
-// 	],
+	[
+		"   													",
+		"   													",
+		"								                        ",
+		"                           							",
+		"                           							",
+		"                           							",
+		"                           							",
+		"	$$$$												",
+		"=======================================================",
+	],
 ]
 
 // define what each symbol means in the level graph
 const levelConf = {
 	// grid size
-	width: 105,
+	width: 100,
+	
 	height: 100,
 	// define each object as a list of components
 	"=": () => [
@@ -216,7 +213,7 @@ const levelConf = {
 		sprite("portal"),
 		area({ scale: 0.5, }),
 		origin("bot"),
-		pos(0, -12),
+		pos(0, -62),
 		"portal",
 	],
 // 	">": () => [
@@ -312,16 +309,16 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 			go("lose")
 		}
 	})
-// 	player.onCollide("portal", () => {
-// 		if (levelId + 1 < LEVELS.length) {
-// 			go("game", {
-// 				levelId: levelId + 1,
-// 				coins: coins,
-// 			})
-// 		} else {
-// 			go("win")
-// 		}
-// 	})
+	player.onCollide("portal", () => {
+		if (levelId + 1 < LEVELS.length) {
+			go("game", {
+				levelId: levelId + 1,
+				coins: coins,
+			})
+		} else {
+			go("win")
+		}
+	})
 
 // 	player.onGround((l) => {
 // 		if (l.is("enemy")) {
@@ -340,7 +337,7 @@ scene("game", ({ levelId, coins } = { levelId: 0, coins: 0 }) => {
 
 const timer = add([
 		text(30),
-		pos(100, 22),
+		pos(150, 22),
 		fixed(),
 		{ time: 30, },
 	])
