@@ -38,11 +38,11 @@ let cons = 0;
 loadSprite("bg", 'importantImages/background.png')
 loadSprite("ghosty", 'importantImages/alarm.PNG')
 loadSprite("spike", 'importantImages/tiktok.png')
-loadSprite("grass", 'importantImages/rock.PNG')
+loadSprite("grass", 'importantImages/rock.png')
 loadSprite("portal", 'importantImages/elivator.png')
 loadSprite("book2", 'importantImages/atomic.PNG')
 loadSprite("keys", 'importantImages/keys.PNG')
-loadSprite("laptop", 'importantImages/laptop.PNG')
+loadSprite("laptop", 'importantImages/laptop.png')
 loadSprite("bookbag", 'importantImages/backpack.PNG')
 loadSprite("charger", 'importantImages/charger.PNG')
 loadSprite("coin", 'importantImages/AAL.PNG')
@@ -301,6 +301,7 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 		timer.time -= dt()
 		timer.text = timer.time.toFixed(2)
 		if (timer.time < 0) {
+			music.stop()
 			go("time")
 		}
 	})
