@@ -1,3 +1,4 @@
+/* Editing h1 title of page */
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700;900&display=swap");
 
 .header {
@@ -48,21 +49,66 @@
     .sweet-title span:nth-child(2) {
         padding-left: 2.25rem;
    }
+/* End of Title Code */
 
-.title{
-    text-align: center;
-    
-}
 .container{
     display: grid;
-    grid-template-columns: 50% 50% ;
+    grid-template-columns: 50% 50%;
+    justify-items:center;
+    padding-top: 8rem;
 }
-.tile{
-    max-width: 5em;
+#start{
+    box-shadow: 3px 4px 0px 0px #899599;
+	background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+	background-color:#ededed;
+	border-radius:15px;
+	border:1px solid #d6bcd6;
+	display:inline-block;
+	cursor:pointer;
+	color:#c35036;
+	font-family:Verdana;
+	font-size:17px;
+	font-weight:bold;
+	padding:7px 25px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #e1e2ed;
+    width: 20em;
 }
-.start{
-    justify-content:center;
+#start:hover {
+	background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+	background-color:#bab1ba;
 }
+#start:active {
+	position:relative;
+	top:1px;
+}
+
+#moreInfo{
+    box-shadow: 3px 4px 0px 0px #899599;
+	background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+	background-color:#ededed;
+	border-radius:15px;
+	border:1px solid #d6bcd6;
+	display:inline-block;
+	cursor:pointer;
+	color:#c35036;
+	font-family:Verdana;
+	font-size:17px;
+	font-weight:bold;
+	padding:7px 25px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #e1e2ed;
+    width:20em;
+}
+#moreInfo:hover {
+	background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+	background-color:#bab1ba;
+}
+#moreInfo:active {
+	position:relative;
+	top:1px;
+}
+
 body{
     animation: animatebody 25s linear infinite;
     background-repeat: repeat-x;
@@ -133,3 +179,27 @@ Modal Body */
     from {top: -300px; opacity: 0}
     to {top: 0; opacity: 1}
   }
+
+  .title {
+	box-shadow: 3px 4px 0px 0px #899599;
+	background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+	background-color:#ededed;
+	border-radius:15px;
+	border:1px solid #d6bcd6;
+	display:inline-block;
+	cursor:pointer;
+	color:#c35036;
+	font-family:Arial;
+	font-size:17px;
+	padding:7px 25px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #e1e2ed;
+}
+.title:hover {
+	background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+	background-color:#bab1ba;
+}
+.title:active {
+	position:relative;
+	top:1px;
+}
