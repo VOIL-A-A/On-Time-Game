@@ -39,7 +39,7 @@ loadSprite("bg", 'importantImages/background.png')
 loadSprite("ghosty", 'importantImages/alarm.PNG')
 loadSprite("spike", 'importantImages/tiktok.png')
 loadSprite("grass", 'importantImages/rock.PNG')
-loadSprite("portal", 'importantImages/laptop.png')
+loadSprite("portal", 'importantImages/elivator.png')
 loadSprite("book2", 'importantImages/atomic.PNG')
 loadSprite("keys", 'importantImages/keys.PNG')
 loadSprite("laptop", 'importantImages/laptop.PNG')
@@ -97,8 +97,8 @@ const LEVELS = [
 		"     ====                                              $",
 		"                      =        1               5       1",
 		"0                     =       ====     >     =====     $",
-		"==                    =               ====             1",
-		"                      =                                $",
+		"==                    =               ====              ",
+		"                      =                                 ",
 		"       ^^      = >    =            >                 = @",
 		"========================================================",
 	],
@@ -114,8 +114,8 @@ const LEVELS = [
 		"==================       =====",
 		"=                        =    ",
 		"=                     ====    ",
-		"=                        = @  ",
-		"=  >              >      =   =",
+		"=                        =    ",
+		"=  >              >      = @ =",
 		"=============================="
 	],
 ]
@@ -216,6 +216,10 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 	
 	]);
 	
+	add([
+		text('press Esc to exit full screen'),
+		pos(0,-200)
+		])
 	gravity(3200)
 	// add level to scene
 	const level = addLevel(LEVELS[levelId ?? 0], levelConf)
@@ -269,6 +273,10 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 			player.jump(JUMP_FORCE * 1.5)
 			destroy(l)
 			addKaboom(player.pos)
+			cons += 10
+			coinPitch += 100
+			coins += 10
+			coinsLabel.text = coins
 		}
 	})
 
