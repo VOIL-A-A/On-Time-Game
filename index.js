@@ -2,8 +2,6 @@
  const modal = document.getElementById("howToModal");
  const spanClose = document.getElementsByClassName("closeModal")[0];
  const howToButton = document.getElementById("moreInfo");
- let submit = document.createAttribute('submit')
-	bodyhtml.appendChild(submit)
  
  // // when the how to play button is clicked, the modal is opened
  howToButton.onclick = function() {
@@ -82,6 +80,7 @@ function patrol(speed = 60, dir = 1) {
 const JUMP_FORCE = 1520
 const MOVE_SPEED = 480
 const FALL_DEATH = 2400
+//Button Function
 
 const LEVELS = [
 	[
@@ -202,6 +201,8 @@ const levelConf = {
 
 //Creats scenes for each level
 scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) => {
+
+
 //background
 	add([
 		sprite('bg', {width: width(), height: height()}),
@@ -357,6 +358,19 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 		player.weight = 1
 	})
 })
+function addButton(txt,p,f){
+		const btn = add([
+		text(txt),
+		pos(p),
+		area({ cursor: "pointer", }),
+		scale(5),
+		// origin("center"),
+			])
+	}
+function home(){
+	location.reload();
+}
+
 
 //Scenes for different endings
 scene("time", () => {
@@ -390,6 +404,9 @@ scene("lose", () => {
 		text('Press any Key to Restart'),
 		pos(250,500)
 		])
+		// add([
+		// sprite('bean')
+		// ])
 	onKeyPress(() => go("game"))
 	cons = 0
 })
