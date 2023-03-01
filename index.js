@@ -48,14 +48,20 @@ loadSprite("charger", 'importantImages/charger.PNG')
 loadSprite("coin", 'importantImages/AAL.PNG')
 loadSound("backgroundSound","Sound/backgroundSong.ogg")
 //loading Player with spritesheet for idle animation
-loadSprite("student-idle", 'importantImages/Julia_Idle_32x32.png', {
+loadSprite("student-idle", 'importantImages/student_sprite.png', {
 	sliceX: 12,
 	anims: {
 		"idle": {
 			from: 0,
-			to: 12,
-			speed: 5,
+			to: 2,
+			speed: 3,
 			loop: true
+		},
+		"run": {
+			from: 8,
+			to: 11,
+			speed: 5,
+			loop:true
 		},
 	},
 });
@@ -240,7 +246,10 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 	player.onGround(() => {
 		if (!isKeyDown("left") && !isKeyDown("right")) {
 			player.play("idle")
-		}
+		} 
+		// else {
+		// 	player.play("run")
+		// }
 	})
 	// action() runs every frame
 	player.onUpdate(() => {
@@ -366,16 +375,31 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 		}
 	})
 	onKeyDown("left", () => {
-		player.move(-MOVE_SPEED, 0)
+		player.move(-MOVE_SPEED, 0);
+		player.flipX(false)
+		if (player.isGrounded() && player.curAnim() !== "run") {
+			player.play("run")
+		}
 	})
 	onKeyDown("right", () => {
 		player.move(MOVE_SPEED, 0)
+		player.flipX(true)
+		if (player.isGrounded() && player.curAnim() !== "run") {
+			player.play("run")
+		}
 	})
 	onKeyPress("down", () => {
 		player.weight = 3
 	})
 	onKeyRelease("down", () => {
 		player.weight = 1
+	})
+
+	onKeyRelease(["left", "right"], () => {
+		// Only reset to "idle" if player is not holding any of these keys
+		if (player.isGrounded() && !isKeyDown("left") && !isKeyDown("right")) {
+			player.play("idle")
+		}
 	})
 })
 function addButton(txt,p,f){
