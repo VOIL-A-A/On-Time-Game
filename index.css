@@ -158,10 +158,6 @@ body{
     font-size: large;
 }
 
-p {
-    width:min-content;
-}
-
 /* The Close Button */
 .closeModal{
     color: #aaa;
