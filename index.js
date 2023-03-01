@@ -46,6 +46,7 @@ loadSprite("laptop", 'importantImages/laptop.PNG')
 loadSprite("bookbag", 'importantImages/backpack.PNG')
 loadSprite("charger", 'importantImages/charger.PNG')
 loadSprite("coin", 'importantImages/AAL.PNG')
+loadSound("backgroundSound","Sound/backgroundSong.ogg")
 //loading Player with spritesheet for idle animation
 loadSprite("student-idle", 'importantImages/student_sprite.png', {
 	sliceY: 7,
@@ -200,9 +201,10 @@ const levelConf = {
 	],
 } 
 
+
 //Creats scenes for each level
 scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) => {
-
+	const music = play("backgroundSound")
 
 //background
 	add([
@@ -247,18 +249,22 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 		camPos(player.pos)
 		// check fall death
 		if (player.pos.y >= FALL_DEATH) {
+			music.stop()
 			go("lose")
 		}
 	})
 	// if player onCollide with any obj with "danger" tag, lose
 	player.onCollide("danger", () => {
+		music.stop()
 		go("lose")
 	})
 
 	player.onCollide("portal", () => {
 		if (levelId + 1 < LEVELS.length) {
+			music.stop()
 			go("next")
 		} else {
+			music.stop()
 			go("win")
 		}
 	})
@@ -278,6 +284,7 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 	player.onCollide("enemy", (e, col) => {
 	// if it's not from the top, die
 		if (!col.isBottom()) {
+			music.stop()
 			go("lose")
 		}
 	})
@@ -323,6 +330,7 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 				levelId: levelId + 1,
 				coins: cons
 			}))
+			stop("backgroundSound")
 	})
 
 	let coinPitch = 0
@@ -421,6 +429,7 @@ scene("lose", () => {
 	addButton('home', vec2(0,0), () => location.reload())
 	onKeyPress(() => go("game"))
 	cons = 0
+	
 })
 scene("win", () => {
 	add([
