@@ -91,8 +91,8 @@ const FALL_DEATH = 2400
 const LEVELS = [
 	[
 	    "       8                                               1",
-	    "      ===                          $1$1     1     $1   $",
-	    "                                   ====     =     ==   1",
+	    "      ===                         1$1$1     1    1$1   $",
+	    "                                  =====     =    ===   1",
 	    "                             =          $1             $",
 	    "===                        ^=           ==             1",
 		"                          ^=                           $",
@@ -116,7 +116,7 @@ const LEVELS = [
 		"=               =        =   =",
 		"=                        =   =",
 		"= $> = 1$1$1$1$1$        = > =",
-		"==================       =====",
+		"===================      =====",
 		"=                        =    ",
 		"=                     ====    ",
 		"=                        =    ",
@@ -128,8 +128,8 @@ const LEVELS = [
 
 const levelConf = {
 // grid size
-	width: 110,
-	height: 100,
+	width: 105,
+	height: 107,
 // define what each symbol means in the level graph
 	"=": () => [
 		sprite("grass"),
@@ -183,7 +183,7 @@ const levelConf = {
 	],
 	"^": () => [
 		sprite("spike"),
-		pos(0,-20),
+		pos(0,-5),
 		area(),
 		solid(),
 		origin("bot"),
@@ -279,7 +279,7 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 
 	player.onGround((l) => {
 		if (l.is("enemy")) {
-			player.jump(JUMP_FORCE * 1.5)
+			player.jump(JUMP_FORCE * 1.7)
 			destroy(l)
 			addKaboom(player.pos)
 			cons += 10
