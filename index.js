@@ -106,11 +106,11 @@ const LEVELS = [
 		"                             =",
 		"                             =",
 		"                             =",
-		"                             =",
+		"        1$1$1$1$1            =",
 		"====    =========   ======   =",
 		"=               =        =   =",
 		"=                        =   =",
-		"=  > =                   = > =",
+		"= $> =                   = > =",
 		"==================       =====",
 		"=                        =    ",
 		"=                     ====    ",
@@ -123,7 +123,7 @@ const LEVELS = [
 
 const levelConf = {
 // grid size
-	width: 95,
+	width: 110,
 	height: 100,
 // define what each symbol means in the level graph
 	"=": () => [
