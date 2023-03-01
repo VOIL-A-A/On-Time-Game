@@ -48,13 +48,12 @@ loadSprite("charger", 'importantImages/charger.PNG')
 loadSprite("coin", 'importantImages/AAL.PNG')
 loadSound("backgroundSound","Sound/backgroundSong.ogg")
 //loading Player with spritesheet for idle animation
-loadSprite("student-idle", 'importantImages/student_sprite.png', {
-	sliceY: 7,
-	sliceX: 7,
+loadSprite("student-idle", 'importantImages/Julia_Idle_32x32.png', {
+	sliceX: 12,
 	anims: {
 		"idle": {
 			from: 0,
-			to: 1,
+			to: 12,
 			speed: 5,
 			loop: true
 		},
