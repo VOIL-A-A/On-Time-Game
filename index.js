@@ -6,17 +6,17 @@
  // // when the how to play button is clicked, the modal is opened
  howToButton.onclick = function() {
 	 modal.style.display = "block";
- }
+ };
  // // when "Close" is clicked, the modal is closed
  spanClose.onclick = function() {
 	 modal.style.display = "none";
- }
+ };
  // // when the modal is opened and anywhere outside of the modal is clicked, the modal will close
  window.onclick = function(e) {
 	 if (e.target === modal) {
 		 modal.style.display = "none";
 	 }
- }
+ };
 //Start Button
 let startButton = document.getElementById('start');
 let bodyhtml = document.getElementById('body');
@@ -177,6 +177,7 @@ const levelConf = {
 	],
 	"^": () => [
 		sprite("spike"),
+		pos(0,-20),
 		area(),
 		solid(),
 		origin("bot"),
