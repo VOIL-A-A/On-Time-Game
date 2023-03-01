@@ -19,8 +19,8 @@
  }
 //Start Button
 let startButton = document.getElementById('start');
-startButton.addEventListener('click', Remove);
 let bodyhtml = document.getElementById('body');
+startButton.addEventListener('click', Remove);
 //Remove Function
 function Remove() {
     let bodyChildren = bodyhtml.children;
@@ -29,20 +29,16 @@ function Remove() {
     }
 }
 
-//
+//game Function(starts the entire game)
 function startgame(){
 kaboom()
 fullscreen(!fullscreen())
-//Cons(coins) is not workin as intended
 let cons = 0;
-// Load assets
+// creating Sprites
 loadSprite("bg", 'importantImages/background.png')
-loadSprite("bean", 'importantImages/laptop.png')
 loadSprite("ghosty", 'importantImages/alarm.PNG')
 loadSprite("spike", 'importantImages/tiktok.png')
 loadSprite("grass", 'importantImages/rock.PNG')
-// loadSprite("prize", 'importantImages/laptop.png')
-// loadSprite("apple", 'importantImages/laptop.png')
 loadSprite("portal", 'importantImages/laptop.png')
 loadSprite("book2", 'importantImages/atomic.PNG')
 loadSprite("keys", 'importantImages/keys.PNG')
@@ -50,7 +46,7 @@ loadSprite("laptop", 'importantImages/laptop.PNG')
 loadSprite("bookbag", 'importantImages/backpack.PNG')
 loadSprite("charger", 'importantImages/charger.PNG')
 loadSprite("coin", 'importantImages/AAL.PNG')
-//loading sprite with spritesheet for idle animation
+//loading Player with spritesheet for idle animation
 loadSprite("student-idle", 'importantImages/student_sprite.png', {
 	sliceY: 7,
 	sliceX: 7,
@@ -105,25 +101,29 @@ const LEVELS = [
 		"========================================================",
 	],
 	[
-		"                             ",
-		"                             ",
-		"                             ",
-		"       ==================    ",
-		"      =                      ",
-		"     =                       ",
-		"    =                        ",
-		"   =                        =",
-		"============================="
+		"                             =",
+		"                             =",
+		"                             =",
+		"                             =",
+		"====    =========   ======   =",
+		"=               =        =   =",
+		"=                        =   =",
+		"=  > =                   = > =",
+		"==================       =====",
+		"=                        =    ",
+		"=                     ====    ",
+		"=                        = @  ",
+		"=  >              >      =   =",
+		"=============================="
 	],
 ]
 
-// define what each symbol means in the level graph
+
 const levelConf = {
-	// grid size
+// grid size
 	width: 95,
-	
 	height: 100,
-	// define each object as a list of components
+// define what each symbol means in the level graph
 	"=": () => [
 		sprite("grass"),
 		area(),
@@ -158,13 +158,6 @@ const levelConf = {
 		origin("bot"),
 		"coin",
 	],
-	// "%": () => [
-	// 	sprite("prize"),
-	// 	area(),
-	// 	solid(),
-	// 	origin("bot"),
-	// 	"prize",
-	// ],
 	"8": () => [
 		sprite("bookbag"),
 		area(),
@@ -188,13 +181,6 @@ const levelConf = {
 		origin("bot"),
 		"danger",
 	],
-	// "#": () => [
-	// 	sprite("apple"),
-	// 	area(),
-	// 	origin("bot"),
-	// 	body(),
-	// 	"apple",
-	// ],
 	">": () => [
 		sprite("ghosty"),
 		area(),
@@ -210,34 +196,11 @@ const levelConf = {
 		pos(0, -62),
 		"portal",
 	],
-// 	">": () => [
-// 		sprite("ghosty"),
-// 		area(),
-// 		origin("bot"),
-// 		body(),
-// 		patrol(),
-// 		"enemy",
-// 	],
-// 	"@": () => [
-// 		sprite("portal"),
-// 		area({ scale: 0.5, }),
-// 		origin("bot"),
-// 		pos(0, -12),
-// 		"portal",
-// 	],
 } 
 
-// add([
-// 	sprite('bg'),
-// 	pos(1,0),
-// 	pos(width()/2, height()/2),
-// 	origin('center'),
-// 	scale(0.4999, 0.4),
-// 	layer('bg')
-
-// ]);
-
+//Creats scenes for each level
 scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) => {
+//background
 	add([
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
@@ -245,8 +208,6 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 		origin('center'),
 		scale(1),
 		fixed()
-		// scale(0.4999, 0.4),
-		// layer('bg')
 	
 	]);
 	
@@ -266,14 +227,11 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 	])
 // makes it so that the idle animation plays
 	player.play("idle");
-// so idle animation plays when player is on ground
+// so idle animation plays when player is on ground and Some events
 	player.onGround(() => {
 		if (!isKeyDown("left") && !isKeyDown("right")) {
 			player.play("idle")
 		}
-		//  else {
-		// 	player.play("run")
-		// }
 	})
 	// action() runs every frame
 	player.onUpdate(() => {
@@ -291,12 +249,7 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 
 	player.onCollide("portal", () => {
 		if (levelId + 1 < LEVELS.length) {
-			go("game", {
-				timer: timer.text = 120,
-				timer: timer.time = 120,
-				levelId: levelId + 1,
-				coins: cons,
-			})
+			go("next")
 		} else {
 			go("win")
 		}
@@ -311,27 +264,12 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 	})
 
 	player.onCollide("enemy", (e, col) => {
-		// if it's not from the top, die
+	// if it's not from the top, die
 		if (!col.isBottom()) {
 			go("lose")
 		}
 	})
-	
-
-// 	player.onGround((l) => {
-// 		if (l.is("enemy")) {
-// 			player.jump(JUMP_FORCE * 1.5)
-// 			destroy(l)
-// 			addKaboom(player.pos)
-// 		}
-// 	})
-
-// 	player.onCollide("enemy", (e, col) => {
-// 		// if it's not from the top, die
-// 		if (!col.isBottom()) {
-// 			go("lose")
-// 		}
-// 	})
+//creats a Timer Player can see
 
 	 timer = add([
 		text(30),
@@ -347,6 +285,30 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 			go("time")
 		}
 	})
+	
+//scene has to be inside game scene in order to appear
+	scene('next', () => {
+		add([
+		sprite('bg', {width: width(), height: height()}),
+		pos(1,0),
+		pos(width()/2, height()/2),
+		origin('center'),
+		scale(1),
+		fixed(),
+		text('Find the hidden Elevator!'),
+	])
+		add([
+			text('level 2')
+			])
+			add([
+		text('Press any Key to Continue'),
+		pos(250,500)
+	])
+			onKeyPress(() => go("game", {
+				levelId: levelId + 1,
+				coins: cons
+			}))
+	})
 
 	let coinPitch = 0
 	onUpdate(() => {
@@ -354,6 +316,7 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 			coinPitch = Math.max(0, coinPitch - dt() * 100)
 		}
 	})
+	//More events
 	player.onCollide("coin", (c) => {
 		destroy(c)
 		cons += 1
@@ -373,7 +336,6 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 		pos(24, 24),
 		fixed(),
 	])
-	// jump with space
 	onKeyPress("space", () => {
 		// these 2 functions are provided by body() component
 		if (player.isGrounded()) {
@@ -393,6 +355,25 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 		player.weight = 1
 	})
 })
+
+//Scenes for different endings
+scene("time", () => {
+	add([
+		sprite('bg', {width: width(), height: height()}),
+		pos(1,0),
+		pos(width()/2, height()/2),
+		origin('center'),
+		scale(1),
+		fixed(),
+		text('You Ran Out of Time'),
+	])
+	add([
+		text('Press any Key to Restart'),
+		pos(250,500)
+		])
+	onKeyPress(() => go("game"))
+	cons = 0
+})
 scene("lose", () => {
 	add([
 		sprite('bg', {width: width(), height: height()}),
@@ -401,8 +382,6 @@ scene("lose", () => {
 		origin('center'),
 		scale(1),
 		fixed(),
-		// scale(0.4999, 0.4),
-		// layer('bg')
 		text(`You Died! Score: ${cons}`),
 	])
 	add([
@@ -420,8 +399,6 @@ scene("win", () => {
 		origin('center'),
 		scale(1),
 		fixed(),
-		// scale(0.4999, 0.4),
-		// layer('bg')
 		text(`You Arrived at Marcy! Score: ${cons}`),
 	])
 	add([
@@ -431,25 +408,7 @@ scene("win", () => {
 	onKeyPress(() => go("game"))
 	cons = 0
 })
-scene('time', () => {
-	add([
-		sprite('bg', {width: width(), height: height()}),
-		pos(1,0),
-		pos(width()/2, height()/2),
-		origin('center'),
-		scale(1),
-		fixed(),
-		// scale(0.4999, 0.4),
-		// layer('bg')
-		text('You ran out of time!')
-		])
-	add([
-		text('Press any Key to Restart'),
-		pos(250,500)
-	])
-	onKeyPress(() => go("game"))
-	cons = 0
-})
+
 go("game")
 }
 startButton.addEventListener('click',startgame)
