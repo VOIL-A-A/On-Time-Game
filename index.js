@@ -36,7 +36,7 @@ fullscreen(!fullscreen())
 let cons = 0;
 // creating Sprites
 loadSprite("bg", 'importantImages/background.png')
-loadSprite("ghosty", 'importantImages/alarm.PNG')
+loadSprite("ghosty", 'importantImages/alarm.png')
 loadSprite("spike", 'importantImages/tiktok.png')
 loadSprite("grass", 'importantImages/rock.png')
 loadSprite("portal", 'importantImages/elivator.png')
@@ -106,16 +106,16 @@ const LEVELS = [
 		"                             =",
 		"                             =",
 		"                             =",
-		"                             =",
+		"         1$1$1$              =",
 		"====    =========   ======   =",
 		"=               =        =   =",
 		"=                        =   =",
-		"=  > =                   = > =",
+		"= $ > =                  = > =",
 		"==================       =====",
 		"=                        =    ",
 		"=                     ====    ",
 		"=                        =    ",
-		"=  >              >      = @ =",
+		"=  >      ^^      >      = @ =",
 		"=============================="
 	],
 ]
