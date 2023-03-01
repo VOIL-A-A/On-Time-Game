@@ -267,6 +267,10 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 			player.jump(JUMP_FORCE * 1.5)
 			destroy(l)
 			addKaboom(player.pos)
+			cons += 10
+			coinPitch += 100
+			coins += 10
+			coinsLabel.text = coins
 		}
 	})
 
