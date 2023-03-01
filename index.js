@@ -214,6 +214,10 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 	
 	]);
 	
+	add([
+		text('press Esc to exit full screen'),
+		pos(0,-200)
+		])
 	gravity(3200)
 	// add level to scene
 	const level = addLevel(LEVELS[levelId ?? 0], levelConf)
