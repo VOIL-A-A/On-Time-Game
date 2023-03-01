@@ -39,7 +39,7 @@ loadSprite("bg", 'importantImages/background.png')
 loadSprite("ghosty", 'importantImages/alarm.PNG')
 loadSprite("spike", 'importantImages/tiktok.png')
 loadSprite("grass", 'importantImages/rock.PNG')
-loadSprite("portal", 'importantImages/laptop.png')
+loadSprite("portal", 'importantImages/elivator.png')
 loadSprite("book2", 'importantImages/atomic.PNG')
 loadSprite("keys", 'importantImages/keys.PNG')
 loadSprite("laptop", 'importantImages/laptop.PNG')
@@ -96,8 +96,8 @@ const LEVELS = [
 		"     ====                                              $",
 		"                      =        1               5       1",
 		"0                     =       ====     >     =====     $",
-		"==                    =               ====             1",
-		"                      =                                $",
+		"==                    =               ====              ",
+		"                      =                                 ",
 		"       ^^      = >    =            >                 = @",
 		"========================================================",
 	],
@@ -113,8 +113,8 @@ const LEVELS = [
 		"==================       =====",
 		"=                        =    ",
 		"=                     ====    ",
-		"=                        = @  ",
-		"=  >              >      =   =",
+		"=                        =    ",
+		"=  >              >      = @ =",
 		"=============================="
 	],
 ]
