@@ -2,6 +2,8 @@
  const modal = document.getElementById("howToModal");
  const spanClose = document.getElementsByClassName("closeModal")[0];
  const howToButton = document.getElementById("moreInfo");
+ let submit = document.createAttribute('submit')
+	bodyhtml.appendChild(submit)
  
  // // when the how to play button is clicked, the modal is opened
  howToButton.onclick = function() {
@@ -392,6 +394,8 @@ scene("lose", () => {
 	cons = 0
 })
 scene("win", () => {
+	let submit = document.createAttribute('submit')
+	bodyhtml.appendChild(submit)
 	add([
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
