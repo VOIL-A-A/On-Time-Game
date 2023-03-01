@@ -95,7 +95,7 @@ const LEVELS = [
 		"      $      ===                                 ==    1",
 		"     ====                                              $",
 		"                      =        1               5       1",
-		"0                     =       ====     >      ====     $",
+		"0                     =       ====     >     =====     $",
 		"==                    =               ====             1",
 		"                      =                                $",
 		"       ^^      = >    =            >                 = @",
@@ -300,13 +300,16 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 		fixed(),
 		text('Find the hidden Elevator!'),
 	])
+	addButton('home', vec2(1300,0), () => location.reload())
 		add([
 			text('level 2')
 			])
+			
 			add([
 		text('Press any Key to Continue'),
 		pos(250,500)
 	])
+	
 			onKeyPress(() => go("game", {
 				levelId: levelId + 1,
 				coins: cons
@@ -363,9 +366,10 @@ function addButton(txt,p,f){
 		text(txt),
 		pos(p),
 		area({ cursor: "pointer", }),
-		scale(5),
+		scale(1),
 		// origin("center"),
 			])
+			btn.onClick(f)
 	}
 function home(){
 	location.reload();
@@ -387,6 +391,7 @@ scene("time", () => {
 		text('Press any Key to Restart'),
 		pos(250,500)
 		])
+	addButton('home', vec2(200,200), () => location.reload())
 	onKeyPress(() => go("game"))
 	cons = 0
 })
@@ -404,15 +409,11 @@ scene("lose", () => {
 		text('Press any Key to Restart'),
 		pos(250,500)
 		])
-		// add([
-		// sprite('bean')
-		// ])
+	addButton('home', vec2(0,0), () => location.reload())
 	onKeyPress(() => go("game"))
 	cons = 0
 })
 scene("win", () => {
-	let submit = document.createAttribute('submit')
-	bodyhtml.appendChild(submit)
 	add([
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
@@ -426,6 +427,7 @@ scene("win", () => {
 		text('Press any Key to Restart'),
 		pos(250,500)
 	])
+	addButton('home', vec2(0,0), () => location.reload())
 	onKeyPress(() => go("game"))
 	cons = 0
 })
