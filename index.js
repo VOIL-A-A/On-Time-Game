@@ -110,12 +110,12 @@ const LEVELS = [
 		"====    =========   ======   =",
 		"=               =        =   =",
 		"=                        =   =",
-		"= $> =                   = > =",
+		"= $> = 1$1$1$1$1$        = > =",
 		"==================       =====",
 		"=                        =    ",
 		"=                     ====    ",
 		"=                        =    ",
-		"=  >              >      = @ =",
+		"=  >   $1$1$1$1   >      = @ =",
 		"=============================="
 	],
 ]
@@ -317,7 +317,7 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 		fixed(),
 		text('Find the hidden Elevator!'),
 	])
-	addButton('home', vec2(1300,0), () => location.reload())
+	addButton('home', vec2(1300,0), home)
 		add([
 			text('level 2')
 			])
@@ -409,7 +409,7 @@ scene("time", () => {
 		text('Press any Key to Restart'),
 		pos(250,500)
 		])
-	addButton('home', vec2(200,200), () => location.reload())
+	addButton('home', vec2(0,0), home)
 	onKeyPress(() => go("game"))
 	cons = 0
 })
@@ -427,7 +427,7 @@ scene("lose", () => {
 		text('Press any Key to Restart'),
 		pos(250,500)
 		])
-	addButton('home', vec2(0,0), () => location.reload())
+	addButton('home', vec2(0,0), home)
 	onKeyPress(() => go("game"))
 	cons = 0
 	
@@ -446,7 +446,7 @@ scene("win", () => {
 		text('Press any Key to Restart'),
 		pos(250,500)
 	])
-	addButton('home', vec2(0,0), () => location.reload())
+	addButton('home', vec2(0,0), home)
 	onKeyPress(() => go("game"))
 	cons = 0
 })
