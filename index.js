@@ -208,7 +208,7 @@ const levelConf = {
 
 
 //Creats scenes for each level
-scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) => {
+scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
 	const music = play("backgroundSound")
 
 //background
@@ -300,7 +300,7 @@ scene("game", ({ levelId, coins, timer } = { levelId: 0, coins: 0, timer: 30}) =
 
 	 timer = add([
 		text(30),
-		pos(150, 22),
+		pos(200, 22),
 		fixed(),
 		{ time: 30, },
 	])
@@ -444,7 +444,7 @@ scene("lose", () => {
 		origin('center'),
 		scale(1),
 		fixed(),
-		text(`You Died! Score: ${cons}`),
+		text(`You're late! Score: ${cons}`),
 	])
 	add([
 		text('Press any Key to Restart'),
