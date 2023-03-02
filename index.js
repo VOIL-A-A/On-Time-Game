@@ -49,7 +49,7 @@ loadSprite("coin", 'importantImages/AAL.PNG')
 loadSound("backgroundSound","Sound/backgroundSong.ogg")
 //loading Player with spritesheet for idle animation
 loadSprite("student-idle", 'importantImages/student_sprite.png', {
-	sliceX: 12,
+	sliceX: 11.8,
 	anims: {
 		"idle": {
 			from: 0,
@@ -224,7 +224,8 @@ scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
 	
 	add([
 		text('press Esc to exit full screen'),
-		pos(0,-200)
+		pos(0,-200),
+		fixed()
 		])
 	gravity(3200)
 	// add level to scene

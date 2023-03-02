@@ -131,7 +131,7 @@ body{
     display: none; /* box is hidden until clicked */
     position: fixed; /* stays in place */
     z-index: 1; /* the modal will sit on top of everything */
-    padding-top: 100px;
+    padding-top: 75px;
     left: 0;
     right: 0;
     top: 0;
