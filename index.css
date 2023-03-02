@@ -115,12 +115,13 @@ body {
   background-repeat: repeat-x;
   background-size: 100%;
 }
+
 @keyframes animatebody {
   0% {
     background-position-x: 0px;
   }
   100% {
-    background-position-x: 95%;
+    background-position-x: -1500px;
   }
 }
 
