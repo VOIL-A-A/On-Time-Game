@@ -326,14 +326,14 @@ scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
 		fixed(),
 		text('Find the hidden Elevator!'),
 	])
-	addButton('home', vec2(1300,0), home)
+	addButton('home', vec2(1100,0), home)
 		add([
 			text('level 2')
 			])
 			
 			add([
 		text('Press any Key to Continue'),
-		pos(250,500)
+		pos(200,500)
 	])
 	
 			onKeyPress(() => go("game", {
@@ -409,7 +409,6 @@ function addButton(txt,p,f){
 		pos(p),
 		area({ cursor: "pointer", }),
 		scale(1),
-		// origin("center"),
 			])
 			btn.onClick(f)
 	}
