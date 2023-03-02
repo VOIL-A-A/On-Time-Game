@@ -120,7 +120,7 @@ body {
     background-position-x: 0px;
   }
   100% {
-    background-position-x: -1500px;
+    background-position-x: 95%;
   }
 }
 
