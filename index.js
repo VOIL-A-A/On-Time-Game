@@ -32,7 +32,7 @@ function Remove() {
 //game Function(starts the entire game)
 function startgame(){
 kaboom()
-fullscreen(!fullscreen())
+// fullscreen(!fullscreen())
 let cons = 0;
 // creating Sprites
 loadSprite("bg", 'importantImages/background.png')
@@ -128,71 +128,72 @@ const LEVELS = [
 
 const levelConf = {
 // grid size
-	width: 105,
-	height: 107,
+	tileWidth: 105,
+	tileHeight: 107,
 // define what each symbol means in the level graph
-	"=": () => [
+	tiles: {
+		"=": () => [
 		sprite("grass"),
 		area(),
-		solid(),
-		origin("bot"),
+		body({ isStatic: true }),
+		anchor("bot"),
 	],
 	"$": () => [
 		sprite("coin"),
 		area(),
 		pos(0, -40),
-		origin("bot"),
+		anchor("bot"),
 		"coin",
 	],
 	"0": () => [
 		sprite("laptop"),
 		area(),
 		pos(0,-40),
-		origin("bot"),
+		anchor("bot"),
 		"coin",
 	],
 	"5": () => [
 		sprite("charger"),
 		area(),
 		pos(0,-40),
-		origin("bot"),
+		anchor("bot"),
 		"coin",
 	],
 	"1": () => [
 		sprite("book2"),
 		pos(0,-40),
 		area(),
-		origin("bot"),
+		anchor("bot"),
 		"coin",
 	],
 	"8": () => [
 		sprite("bookbag"),
 		area(),
 		pos(0,-40),
-		solid(),
-		origin("bot"),
+		body({ isStatic: true }),
+		anchor("bot"),
 		"coin",
 	],
 	"2": () => [
 		sprite("keys"),
 		area(),
 		pos(0,-20),
-		solid(),
-		origin("bot"),
+		body({ isStatic: true }),
+		anchor("bot"),
 		"coin",
 	],
 	"^": () => [
 		sprite("spike"),
 		pos(0,-5),
 		area(),
-		solid(),
-		origin("bot"),
+		body({ isStatic: true }),
+		anchor("bot"),
 		"danger",
 	],
 	">": () => [
 		sprite("ghosty"),
 		area(),
-		origin("bot"),
+		anchor("bot"),
 		body(),
 		patrol(),
 		"enemy",
@@ -200,23 +201,24 @@ const levelConf = {
 	"@": () => [
 		sprite("portal"),
 		area({ scale: 0.5, }),
-		origin("bot"),
+		anchor("bot"),
 		pos(0, -62),
 		"portal",
 	],
+	}
 } 
 
 
 //Creats scenes for each level
 scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
-	const music = play("backgroundSound")
+	let music = play("backgroundSound")
 
 //background
 	add([
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
 		pos(width()/2, height()/2),
-		origin('center'),
+		anchor('center'),
 		scale(1),
 		fixed()
 	
@@ -227,7 +229,7 @@ scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
 		pos(0,-200),
 		fixed()
 		])
-	gravity(3200)
+	setGravity(3200)
 	// add level to scene
 	const level = addLevel(LEVELS[levelId ?? 0], levelConf)
 	// define player object
@@ -239,7 +241,7 @@ scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
 		// makes it fall to gravity and jumpable
 		body(),
 		// the custom component we defined above
-		origin("bot"),
+		anchor("bot"),
 	])
 // makes it so that the idle animation plays
 	player.play("idle");
@@ -321,7 +323,7 @@ scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
 		pos(width()/2, height()/2),
-		origin('center'),
+		anchor('center'),
 		scale(1),
 		fixed(),
 		text('Find the hidden Elevator!'),
@@ -377,14 +379,14 @@ scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
 	})
 	onKeyDown("left", () => {
 		player.move(-MOVE_SPEED, 0);
-		player.flipX(false)
+		player.flipX = false
 		if (player.isGrounded() && player.curAnim() !== "run") {
 			player.play("run")
 		}
 	})
 	onKeyDown("right", () => {
 		player.move(MOVE_SPEED, 0)
-		player.flipX(true)
+		player.flipX= true
 		if (player.isGrounded() && player.curAnim() !== "run") {
 			player.play("run")
 		}
@@ -423,7 +425,7 @@ scene("time", () => {
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
 		pos(width()/2, height()/2),
-		origin('center'),
+		anchor('center'),
 		scale(1),
 		fixed(),
 		text('You Ran Out of Time'),
@@ -441,7 +443,7 @@ scene("lose", () => {
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
 		pos(width()/2, height()/2),
-		origin('center'),
+		anchor('center'),
 		scale(1),
 		fixed(),
 		text(`You're late! Score: ${cons}`),
@@ -460,7 +462,7 @@ scene("win", () => {
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
 		pos(width()/2, height()/2),
-		origin('center'),
+		anchor('center'),
 		scale(1),
 		fixed(),
 		text(`You Arrived at Marcy! Score: ${cons}`),
