@@ -32,7 +32,7 @@ function Remove() {
 //game Function(starts the entire game)
 function startgame(){
 kaboom()
-// fullscreen(!fullscreen())
+fullscreen(!fullscreen())
 let cons = 0;
 // creating Sprites
 loadSprite("bg", 'importantImages/background.png')
@@ -128,72 +128,71 @@ const LEVELS = [
 
 const levelConf = {
 // grid size
-	tileWidth: 105,
-	tileHeight: 107,
+	width: 105,
+	height: 107,
 // define what each symbol means in the level graph
-	tiles: {
-		"=": () => [
+	"=": () => [
 		sprite("grass"),
 		area(),
-		body({ isStatic: true }),
-		anchor("bot"),
+		solid(),
+		origin("bot"),
 	],
 	"$": () => [
 		sprite("coin"),
 		area(),
 		pos(0, -40),
-		anchor("bot"),
+		origin("bot"),
 		"coin",
 	],
 	"0": () => [
 		sprite("laptop"),
 		area(),
 		pos(0,-40),
-		anchor("bot"),
+		origin("bot"),
 		"coin",
 	],
 	"5": () => [
 		sprite("charger"),
 		area(),
 		pos(0,-40),
-		anchor("bot"),
+		origin("bot"),
 		"coin",
 	],
 	"1": () => [
 		sprite("book2"),
 		pos(0,-40),
 		area(),
-		anchor("bot"),
+		origin("bot"),
 		"coin",
 	],
 	"8": () => [
 		sprite("bookbag"),
 		area(),
 		pos(0,-40),
-		body({ isStatic: true }),
-		anchor("bot"),
+		solid(),
+		origin("bot"),
 		"coin",
 	],
 	"2": () => [
 		sprite("keys"),
 		area(),
 		pos(0,-20),
-		body({ isStatic: true }),
-		anchor("bot"),
+		solid(),
+		origin("bot"),
 		"coin",
 	],
 	"^": () => [
 		sprite("spike"),
 		pos(0,-5),
 		area(),
-		body({ isStatic: true }),
-		anchor("bot"),
+		solid(),
+		origin("bot"),
 		"danger",
 	],
 	">": () => [
 		sprite("ghosty"),
 		area(),
-		anchor("bot"),
+		origin("bot"),
 		body(),
 		patrol(),
 		"enemy",
@@ -201,24 +200,23 @@ const levelConf = {
 	"@": () => [
 		sprite("portal"),
 		area({ scale: 0.5, }),
-		anchor("bot"),
+		origin("bot"),
 		pos(0, -62),
 		"portal",
 	],
-	}
 } 
 
 
 //Creats scenes for each level
 scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
-	let music = play("backgroundSound")
+	const music = play("backgroundSound")
 
 //background
 	add([
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
 		pos(width()/2, height()/2),
-		anchor('center'),
+		origin('center'),
 		scale(1),
 		fixed()
 	
@@ -229,7 +227,7 @@ scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
 		pos(0,-200),
 		fixed()
 		])
-	setGravity(3200)
+	gravity(3200)
 	// add level to scene
 	const level = addLevel(LEVELS[levelId ?? 0], levelConf)
 	// define player object
@@ -241,7 +239,7 @@ scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
 		// makes it fall to gravity and jumpable
 		body(),
 		// the custom component we defined above
-		anchor("bot"),
+		origin("bot"),
 	])
 // makes it so that the idle animation plays
 	player.play("idle");
@@ -323,19 +321,19 @@ scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
 		pos(width()/2, height()/2),
-		anchor('center'),
+		origin('center'),
 		scale(1),
 		fixed(),
 		text('Find the hidden Elevator!'),
 	])
-	addButton('home', vec2(1100,0), home)
+	addButton('home', vec2(1300,0), home)
 		add([
 			text('level 2')
 			])
 			
 			add([
 		text('Press any Key to Continue'),
-		pos(200,500)
+		pos(250,500)
 	])
 	
 			onKeyPress(() => go("game", {
@@ -379,14 +377,14 @@ scene("game", ({ levelId, coins} = { levelId: 0, coins: 0}) => {
 	})
 	onKeyDown("left", () => {
 		player.move(-MOVE_SPEED, 0);
-		player.flipX = false
+		player.flipX(false)
 		if (player.isGrounded() && player.curAnim() !== "run") {
 			player.play("run")
 		}
 	})
 	onKeyDown("right", () => {
 		player.move(MOVE_SPEED, 0)
-		player.flipX= true
+		player.flipX(true)
 		if (player.isGrounded() && player.curAnim() !== "run") {
 			player.play("run")
 		}
@@ -411,6 +409,7 @@ function addButton(txt,p,f){
 		pos(p),
 		area({ cursor: "pointer", }),
 		scale(1),
+		// origin("center"),
 			])
 			btn.onClick(f)
 	}
@@ -425,7 +424,7 @@ scene("time", () => {
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
 		pos(width()/2, height()/2),
-		anchor('center'),
+		origin('center'),
 		scale(1),
 		fixed(),
 		text('You Ran Out of Time'),
@@ -443,7 +442,7 @@ scene("lose", () => {
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
 		pos(width()/2, height()/2),
-		anchor('center'),
+		origin('center'),
 		scale(1),
 		fixed(),
 		text(`You're late! Score: ${cons}`),
@@ -462,7 +461,7 @@ scene("win", () => {
 		sprite('bg', {width: width(), height: height()}),
 		pos(1,0),
 		pos(width()/2, height()/2),
-		anchor('center'),
+		origin('center'),
 		scale(1),
 		fixed(),
 		text(`You Arrived at Marcy! Score: ${cons}`),
